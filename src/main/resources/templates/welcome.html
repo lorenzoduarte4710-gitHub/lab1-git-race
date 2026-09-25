@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" th:lang="${language}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,15 @@
                     <div class="card-body text-center p-5">
                         <img class="d-block mx-auto mb-4 main-logo" src="/assets/logo.svg" alt="Universidad Zaragoza Logo">
                         <h1 class="display-4 fw-bold text-primary mb-4">Welcome to Modern Web App</h1>
-                        <p class="lead mb-4" th:text="${message}">Hello student.</p>
+                        <p class="lead mb-2" th:text="${message}">Hello student.</p>
+                        <!-- Greeting context decided by the server (GreetingService) -->
+                        <p class="text-muted mb-4" id="greetingContext">
+                            Language: <span class="badge bg-secondary" th:text="${language}">en</span>
+                            &middot; Time of day: <span class="badge bg-secondary" th:text="${timeOfDay}">morning</span>
+                            &middot;
+                            <a id="langEs" th:href="@{/(name=${name},lang='es')}" href="/?lang=es">ES</a> |
+                            <a id="langEn" th:href="@{/(name=${name},lang='en')}" href="/?lang=en">EN</a>
+                        </p>
                         
                         <!-- HTTP Debug Section -->
                         <div class="row mt-4">
