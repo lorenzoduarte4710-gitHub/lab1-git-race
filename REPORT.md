@@ -12,7 +12,7 @@ I also asked for the logic in a separate service, an injected clock (java.time.C
 
 ## What I changed
 
-I added a clock bean (config/ClockConfig.kt), two enums (model/Language.kt, model/TimeOfDay.kt), a result class (model/Greeting.kt) and the service that builds the greeting (service/GreetingService.kt). Both controllers (controller/HelloController.kt) now use the service. The page (welcome.html) shows the greeting, the language, the time of day and two links (ES | EN) to change the language. I also added a README section, a test helper with a fixed clock (FixedClockConfig.kt) and two test classes (GreetingServiceTests.kt, GreetingMVCTests.kt).
+I added a clock bean (config/ClockConfig.kt), two enums (model/Language.kt, model/TimeOfDay.kt), a result class (model/Greeting.kt) and the service that builds the greeting (service/GreetingService.kt). Both controllers (controller/HelloController.kt) now use the service. The page (welcome.html) shows the greeting, the language, the time of day and two links (ES | EN) to change the language. I also added a README section, a test helper with a fixed clock (FixedClockConfig.kt) and two test classes (GreetingServiceTests.kt, GreetingMVCTests.kt). No new properties or dependencies were added.
 
 For example, a request for Ana with the Spanish header at 19:36 returned ({"message":"Buenas tardes, Ana!","timestamp":"2026-09-25T17:36:30.306325100Z","language":"es","timeOfDay":"afternoon"}). The page without a name still shows the default message (app.message), as before.
 
@@ -33,7 +33,7 @@ No new test failed, but three existing test files had to change, because the old
 ## AI disclosure
 
 - **Tools / skills:** Claude Code (VS Code extension, model Claude Opus 5.5).
-- **Purpose:** It proposed a design from my specification, then implemented the code, the tests, the KDoc and the README section, ran the checks, made the commits and the merge, created my GitHub fork and drafted this report, all at my request. The guide allows only assistive use, but in practice the assistant wrote most of the code and this report. My part was the specification, the design constraints and the decisions above. Every commit has a co-author line (Co-Authored-By: Claude).
+- **Purpose:** It proposed a design from my specification, then implemented the code, the tests, the KDoc and the README section, ran the checks, made the commits and the merge, created my GitHub fork and drafted this report, all at my request. The guide allows only assistive use, but in practice the assistant wrote most of the code and this report. My part was the specification, the design constraints and the decisions above. Every commit made by the assistant has a co-author line (Co-Authored-By: Claude).
 - **Representative prompts:** My first prompt, translated from Spanish: "Read docs/GUIDE.md and the existing code, and start by proposing the design. Wait for my OK before writing code." It also contained the specification and the list of tests. Later: "Yes to everything, you do it" and "No, you are going to write it" (for this report).
 - **Affected files/sections:** All the files listed above and this report, in five commits and one merge commit.
 - **Validation steps:** The checks in the How I verified section, run by the assistant in my environment.
