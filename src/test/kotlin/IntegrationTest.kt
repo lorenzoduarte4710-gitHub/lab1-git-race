@@ -8,11 +8,13 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.boot.resttestclient.TestRestTemplate
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate
 import org.springframework.boot.test.web.server.LocalServerPort
+import org.springframework.context.annotation.Import
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestRestTemplate
+@Import(FixedClockConfig::class)
 class IntegrationTest {
     @LocalServerPort
     private var port: Int = 0
@@ -36,7 +38,7 @@ class IntegrationTest {
         val response = restTemplate.getForEntity("http://localhost:$port?name=Developer", String::class.java)
         
         assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
-        assertThat(response.body).contains("Hello, Developer!")
+        assertThat(response.body).contains("Good morning, Developer!")
     }
 
     @Test
@@ -45,7 +47,7 @@ class IntegrationTest {
         
         assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
         assertThat(response.headers.contentType).isEqualTo(MediaType.APPLICATION_JSON)
-        assertThat(response.body).contains("Hello, Test!")
+        assertThat(response.body).contains("Good morning, Test!")
         assertThat(response.body).contains("timestamp")
     }
 

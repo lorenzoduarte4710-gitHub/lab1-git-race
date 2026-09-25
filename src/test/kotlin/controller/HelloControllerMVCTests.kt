@@ -1,10 +1,13 @@
 package es.unizar.webeng.hello.controller
 
+import es.unizar.webeng.hello.FixedClockConfig
+import es.unizar.webeng.hello.service.GreetingService
 import org.hamcrest.CoreMatchers.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest
+import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
@@ -12,6 +15,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 
 @WebMvcTest(HelloController::class, HelloApiController::class)
+@Import(GreetingService::class, FixedClockConfig::class)
 class HelloControllerMVCTests {
     @Value("\${app.message:Welcome to the Modern Web App!}")
     private lateinit var message: String
@@ -35,7 +39,7 @@ class HelloControllerMVCTests {
             .andDo(print())
             .andExpect(status().isOk)
             .andExpect(view().name("welcome"))
-            .andExpect(model().attribute("message", equalTo("Hello, Developer!")))
+            .andExpect(model().attribute("message", equalTo("Good morning, Developer!")))
             .andExpect(model().attribute("name", equalTo("Developer")))
     }
     
@@ -45,7 +49,7 @@ class HelloControllerMVCTests {
             .andDo(print())
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.message", equalTo("Hello, Test!")))
+            .andExpect(jsonPath("$.message", equalTo("Good morning, Test!")))
             .andExpect(jsonPath("$.timestamp").exists())
     }
 }
